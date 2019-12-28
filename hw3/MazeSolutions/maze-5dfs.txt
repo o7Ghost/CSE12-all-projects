@@ -1,0 +1,8 @@
+Uh Oh!! There's no escape!!
+
+S...
+..##
+..#_
+..#E
+
+Number of squares remaining in the worklist = 0

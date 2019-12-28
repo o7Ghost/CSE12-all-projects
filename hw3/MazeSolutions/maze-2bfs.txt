@@ -1,0 +1,8 @@
+Found the Escape!
+Path from start to finish: [0,0] [0,1] [0,2] [1,2] [2,2] 
+
+Sxx
+..x
+..E
+
+Number of squares remaining in the worklist = 0
