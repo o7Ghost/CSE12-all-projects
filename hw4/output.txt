@@ -1,0 +1,44 @@
+apple: ok
+asteroid: ok
+culmination: ok
+computerscience: computer science
+ashlesha: not found
+appoe: apple
+banna: banana
+ornage: orange
+potato: ok
+cherrystrawberry: cherry strawberry
+poatta: not found
+pineapple: ok
+huwuh: not found
+yippie: not found
+zzzzzzzz: not found
+pol: pal, pod, pop, pot, pox, pool, poll, pole, polo
+transcription: ok
+ludecrous: ludicrous
+utdoings: undoings
+tiannual: biannual
+institutes: ok
+beicycle: bicycle
+pwillow: willow, pillow
+masterchef: master chef
+beding: being, beading, bedding, bending
+sprice: splice, spruce, sprite, price, spice
+treestop: treetop, tree stop, trees top
+starwars: star wars
+earnest: ok
+woah: not found
+ron: don, ion, non, son, ton, won, yon, ran, run, rob, rod, roe, rot, row, on, iron
+tup: cup, pup, sup, tap, tip, top, tub, tug, up
+mesy: mesh, mess, messy
+i: pi, if, in, is, it
+yu: you
+char: ok
+anti: ok
+farthest: ok
+porcupine: ok
+kloser: closer, loser
+tooawesome: too awesome
+naty: navy, nay, nasty
+alphabt: alphabet
+dedicatn: dedicate
