@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
  *  @author Qiao Jia Lu(Joseph)
  *  @version 3.0 05-April-2015
  *
- *  cs12fbo
+ * cs12fbo
  * */
 
 /*
@@ -39,12 +39,20 @@ import java.util.NoSuchElementException;
  * (renaming LinkedList to MyLinkedList everywhere in the file) so that you can
  * use it to test your MyLinkedList and MyListIterator classes.
  */
-public class LinkedListTester
+public class MyLinkedListTester
 {
-  private LinkedList<Integer> empty ;
-  private LinkedList<Integer> one ;
-  private LinkedList<Integer> several ;
-  private LinkedList<String>  slist ;
+  //declaration
+  private MyLinkedList<Integer> empty;
+  private MyLinkedList<Integer> one;
+  private MyLinkedList<Integer> several;
+  private MyLinkedList<String>  slist;
+  private MyLinkedList<Integer> noElem;
+  private MyLinkedList<Integer> oneElem;
+  private MyLinkedList<Integer> severalElem;
+  private ListIterator<Integer> iterNo;
+  private ListIterator<Integer> iterOne;
+  private ListIterator<Integer> iterSeveral;
+
   static final int DIM = 5;
   static final int FIBMAX = 30;
   
@@ -55,18 +63,33 @@ public class LinkedListTester
   @Before
   public void setUp()
   {
-    empty = new LinkedList<Integer>();
-    one = new LinkedList<Integer>();
+    empty = new MyLinkedList<Integer>();
+    one = new MyLinkedList<Integer>();
     one.add(0,new Integer(0));
-    several = new LinkedList<Integer>() ;
+    several = new MyLinkedList<Integer>() ;
     // List: 1,2,3,...,Dim
     for (int i = DIM; i > 0; i--) 
       several.add(0,new Integer(i));
 
     // List: "First","Last"
-    slist = new LinkedList<String>();
+    slist = new MyLinkedList<String>();
     slist.add(0,"First");
     slist.add(1,"Last");
+
+    noElem  = new MyLinkedList<Integer>();
+    oneElem  = new MyLinkedList<Integer>();
+    severalElem  = new MyLinkedList<Integer>();
+
+    iterNo = noElem.listIterator();
+    iterOne = oneElem.listIterator();
+    iterSeveral = severalElem.listIterator();
+    
+    iterOne.add(0);
+
+    for (int i = DIM; i > 0; i--) {
+       iterSeveral.add(i);
+    }
+
   }
   
   /** Test if heads of the lists are correct */
@@ -147,7 +170,7 @@ public class LinkedListTester
   public void testIteratorFibonacci()
   {
     
-    LinkedList<Integer> fib  = new LinkedList<Integer>();
+    MyLinkedList<Integer> fib  = new MyLinkedList<Integer>();
     ListIterator<Integer> iter;
     // List: 0 1 1 2 3 5 8 13 ... 
     // Build the list with integers 1 .. FIBMAX
@@ -275,6 +298,7 @@ public class LinkedListTester
  
     //Test remove for several LinkedList
     several.remove(three);
+    
     assertEquals("checking if element is removed for several", 
 		  4, several.size());
     assertEquals("checking adject elements are correct",
@@ -631,25 +655,7 @@ public class LinkedListTester
 
   /* iter 1 test if there is a next element in the list */
   @Test
-  public void hasNextTest() {
-    LinkedList<Integer> noElem  = new LinkedList<Integer>();
-    LinkedList<Integer> oneElem  = new LinkedList<Integer>();
-    LinkedList<Integer> severalElem  = new LinkedList<Integer>();
-
-    ListIterator<Integer> iterNo;
-    ListIterator<Integer> iterOne;
-    ListIterator<Integer> iterSeveral;
-    
-    iterNo = noElem.listIterator();
-    iterOne = oneElem.listIterator();
-    iterSeveral = severalElem.listIterator();
-    
-    iterOne.add(0);
-
-    for (int i = DIM; i > 0; i--) {
-       iterSeveral.add(i);
-    }
-    
+  public void hasNextTest() {	  
     iterOne.previous();
     iterSeveral.previous();
 
@@ -661,25 +667,6 @@ public class LinkedListTester
   /* iter 2 test if there is a previous element in the list */
   @Test
   public void hasPrevTest() {
-    LinkedList<Integer> noElem  = new LinkedList<Integer>();
-    LinkedList<Integer> oneElem  = new LinkedList<Integer>();
-    LinkedList<Integer> severalElem  = new LinkedList<Integer>();
-
-    ListIterator<Integer> iterNo;
-    ListIterator<Integer> iterOne;
-    ListIterator<Integer> iterSeveral;
-
-    iterNo = noElem.listIterator();
-    iterOne = oneElem.listIterator();
-    iterSeveral = severalElem.listIterator();
-
-    iterOne.add(0);
-
-    
-    for (int i = DIM; i > 0; i--) {
-       iterSeveral.add(i);
-    }
-    
     assertTrue("has no element", !iterNo.hasPrevious());
     assertTrue("one has element", iterOne.hasPrevious());
     assertTrue("several has element",  iterSeveral.hasPrevious());
@@ -689,25 +676,6 @@ public class LinkedListTester
   @Test
   public void nextTest() {
     int two = 2;
-
-    LinkedList<Integer> noElem  = new LinkedList<Integer>();
-    LinkedList<Integer> oneElem  = new LinkedList<Integer>();
-    LinkedList<Integer> severalElem  = new LinkedList<Integer>();
-
-    ListIterator<Integer> iterNo;
-    ListIterator<Integer> iterOne;
-    ListIterator<Integer> iterSeveral;
-
-    iterNo = noElem.listIterator();
-    iterOne = oneElem.listIterator();
-    iterSeveral = severalElem.listIterator();
-
-    iterOne.add(0);
-    
-    for (int i = DIM; i > 0; i--) {
-       iterSeveral.add(i);
-    }
-    
     iterOne.previous();
  
     iterSeveral.previous();
@@ -721,30 +689,12 @@ public class LinkedListTester
   @Test
   public void previousTest() {
     int three = 3;
-
-    LinkedList<Integer> noElem  = new LinkedList<Integer>();
-    LinkedList<Integer> oneElem  = new LinkedList<Integer>();
-    LinkedList<Integer> severalElem  = new LinkedList<Integer>();
-
-    ListIterator<Integer> iterNo;
-    ListIterator<Integer> iterOne;
-    ListIterator<Integer> iterSeveral;
-
-    iterNo = noElem.listIterator();
-    iterOne = oneElem.listIterator();
-    iterSeveral = severalElem.listIterator();
-
-    iterOne.add(0);
-    
-    for (int i = DIM; i > 0; i--) {
-       iterSeveral.add(i);
-    }
     
     iterSeveral.previous();
     iterSeveral.previous();
 
     assertEquals("check one's next()", new Integer(0), iterOne.previous());
-    assertEquals("check several next()", new Integer(3), iterSeveral.previous());
+    assertEquals("check several next()", new Integer(three), iterSeveral.previous());
   }
    
   /* test if nextIndex would return the index of the element */
@@ -753,24 +703,6 @@ public class LinkedListTester
     int five = 5;
     int four = 4;
     
-    LinkedList<Integer> noElem  = new LinkedList<Integer>();
-    LinkedList<Integer> oneElem  = new LinkedList<Integer>();
-    LinkedList<Integer> severalElem  = new LinkedList<Integer>();
-
-    ListIterator<Integer> iterNo;
-    ListIterator<Integer> iterOne;
-    ListIterator<Integer> iterSeveral;
-
-    iterNo = noElem.listIterator();
-    iterOne = oneElem.listIterator();
-    iterSeveral = severalElem.listIterator();
-
-    iterOne.add(0);
-    
-    for (int i = DIM; i > 0; i--) {
-       iterSeveral.add(i);
-    }
-
     assertEquals("check one's return size", 1, iterOne.nextIndex());
     assertEquals("check several next()", five, iterSeveral.nextIndex());
 
@@ -791,25 +723,6 @@ public class LinkedListTester
   /* test if previousIndex would return the index of the element */
   @Test
   public void prevIndexTest() {
-
-    LinkedList<Integer> noElem  = new LinkedList<Integer>();
-    LinkedList<Integer> oneElem  = new LinkedList<Integer>();
-    LinkedList<Integer> severalElem  = new LinkedList<Integer>();
-
-    ListIterator<Integer> iterNo;
-    ListIterator<Integer> iterOne;
-    ListIterator<Integer> iterSeveral;
-
-    iterNo = noElem.listIterator();
-    iterOne = oneElem.listIterator();
-    iterSeveral = severalElem.listIterator();
-
-    iterOne.add(0);
-    
-    for (int i = DIM; i > 0; i--) {
-       iterSeveral.add(i);
-    }
-
     iterOne.previous();
     
     assertEquals("check one's return size", -1, iterOne.previousIndex());
@@ -829,25 +742,6 @@ public class LinkedListTester
   /* test if iterator would return the right element */
   @Test
   public void iteratorsetTest() {
-	  
-    LinkedList<Integer> noElem  = new LinkedList<Integer>();
-    LinkedList<Integer> oneElem  = new LinkedList<Integer>();
-    LinkedList<Integer> severalElem  = new LinkedList<Integer>();
-
-    ListIterator<Integer> iterNo;
-    ListIterator<Integer> iterOne;
-    ListIterator<Integer> iterSeveral;
-
-    iterNo = noElem.listIterator();
-    iterOne = oneElem.listIterator();
-    iterSeveral = severalElem.listIterator();
-
-    iterOne.add(0);
-    
-    for (int i = DIM; i > 0; i--) {
-       iterSeveral.add(i);
-    }
-
     iterOne.previous();
     iterOne.set(1);
 
@@ -860,23 +754,6 @@ public class LinkedListTester
   /* test if remove is correct for left and right */
   @Test
   public void iterRemoveTest() {
-
-    LinkedList<Integer> noElem  = new LinkedList<Integer>();
-    LinkedList<Integer> oneElem  = new LinkedList<Integer>();
-    LinkedList<Integer> severalElem  = new LinkedList<Integer>();
-
-    ListIterator<Integer> iterNo;
-    ListIterator<Integer> iterOne;
-    ListIterator<Integer> iterSeveral;
-
-    iterNo = noElem.listIterator();
-    iterOne = oneElem.listIterator();
-    iterSeveral = severalElem.listIterator();
-
-    for (int i = DIM; i > 0; i--) {
-       iterSeveral.add(i);
-    }
-
     iterSeveral.previous();
     iterSeveral.previous();
 
@@ -896,42 +773,14 @@ public class LinkedListTester
   /* test if add for iterator is correct */
   @Test
   public void iterAddTest() {
-
     int four = 4;
-    LinkedList<Integer> noElem  = new LinkedList<Integer>();
-    LinkedList<Integer> oneElem  = new LinkedList<Integer>();
-    LinkedList<Integer> severalElem  = new LinkedList<Integer>();
-
-    ListIterator<Integer> iterNo;
-    ListIterator<Integer> iterOne;
-    ListIterator<Integer> iterSeveral;
-
-    iterNo = noElem.listIterator();
-    iterOne = oneElem.listIterator();
-    iterSeveral = severalElem.listIterator();
-
-    for (int i = DIM; i > 0; i--) {
-       iterSeveral.add(i);
-    }
- 
-    iterOne.add(0);
-    assertEquals("check add", new Integer(0) , oneElem.get(0));
-    assertEquals("check add", new Integer(1) , severalElem.get(four));
+    assertEquals("check add", new Integer(0), iterOne.previous());
+    assertEquals("check add", new Integer(1), iterSeveral.previous());
   }
 
   /* check what happens if there is no next element */
   @Test
   public void iterNextException() {
-
-    LinkedList<Integer> severalElem  = new LinkedList<Integer>();
-    ListIterator<Integer> iterSeveral;
-    iterSeveral = severalElem.listIterator();
-
-    for (int i = DIM; i > 0; i--) {
-      iterSeveral.add(i);
-    }
-
-
     try {
       iterSeveral.next();
       fail("Should have generated an exception"); 
@@ -945,19 +794,10 @@ public class LinkedListTester
   /* check what happens if there is no next element */
   @Test
   public void iterpreviousexception() {
-
-    LinkedList<Integer> severalElem  = new LinkedList<Integer>();
-    ListIterator<Integer> iterSeveral;
-    iterSeveral = severalElem.listIterator();
-
-    for (int i = DIM; i > 0; i--) {
-      iterSeveral.add(i);
-    }
-   
     for (int i = DIM; i > 0; i--) {
       iterSeveral.previous();
     }
-
+    
     try {
       iterSeveral.previous();
       fail("Should have generated an exception"); 
@@ -966,10 +806,60 @@ public class LinkedListTester
     catch(NoSuchElementException e) {
 
     }
+    
   }
 
+  /* test if null argument are accpeted by set */
+  @Test
+  public void iterSetNullTest() {
+    iterSeveral.previous();
 
+    try {
+     iterSeveral.set(null);
+     fail("Should have generated an exception"); 
+    }
 
-  
-  /* Add your own tests here */
+    catch(IllegalArgumentException e) {
+
+    }
+  }
+
+  /* test if next and prev has been called before set*/
+  @Test
+  public void iterNextAndPrevException() {
+    try {
+     iterSeveral.set(0);
+     fail("Should have generated an exception"); 
+    }
+
+    catch(IllegalStateException e) {
+
+    }
+  }
+
+  /*test if next and pre has been called before remove */
+  @Test
+  public void iterRemoveException() {	  
+    try {
+     iterSeveral.remove();
+     fail("Should have generated an exception"); 
+    }
+
+    catch(IllegalStateException e) {
+
+    }
+  }
+
+  /* Test for null before iterator adding */
+  @Test
+  public void iterAddNullTest() {
+    try {
+     iterSeveral.add(null);    
+     fail("Should have generated an exception"); 
+    }
+
+    catch(IllegalArgumentException e) {
+
+    }
+  }
 }
